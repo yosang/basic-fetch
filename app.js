@@ -14,3 +14,8 @@ fetch(url) // returns a promise - a promise is basically just a wrapper around t
 .catch((err) => { // In case of errors during the fetch, the catch will receive an error object
     if(err) console.log(err.message) // Here we are logging the message of the error object ot the console
 })
+
+
+// We can store a promise as well, and eithe resolve it with a .then or an await (needs an async func)
+const result = fetch(url).then(res => res.json()).catch(err => console.log(err.message));
+result.then(data => console.log(data))
