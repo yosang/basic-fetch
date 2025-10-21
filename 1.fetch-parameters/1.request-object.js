@@ -8,7 +8,10 @@ const options = {
 const request = new Request(url, options);
 
 fetch(request)
-  .then((response) => response.json())
+  .then((response) => {
+    if(!response.ok) throw new Error('Invalid response')
+    return response.json()
+  })
   .then((data) => console.log(data))
   .catch((err) => console.log(err))
   .finally(() => console.log("Fetch complete"));
