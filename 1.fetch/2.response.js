@@ -33,7 +33,10 @@ function replaceImage() {
   fetch(imgStr)
     .then((response) => {
       if (!response.ok) throw new Error("Invalid response");
-      return response.blob();
+      return response.blob(); // binary large object - images, video, audio, fonts etc
+
+      response.text() // For text, html, xml files, css, javascript etc
+      response.json() // for json files
     })
     .then((blob) => {
       const blobPath = URL.createObjectURL(blob);
