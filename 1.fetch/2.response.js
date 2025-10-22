@@ -73,8 +73,10 @@ function fetchData() {
 
         // Retrieves the ul element
         const users = document.getElementById('users');
-        users.innerHTML = data.map((user) => {return `
-          <p><strong>${user.name}</strong> works at <strong>${user.company.name}</strong></p>
+        
+        // Here we are destructuring the data object
+        users.innerHTML = data.map(({name, company: {name: companyName}}) => {return `
+          <p><strong>${name}</strong> works at <strong>${companyName}</strong></p>
           `
       }).join('')
 
