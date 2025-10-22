@@ -70,22 +70,28 @@ function fetchData() {
     fetch(jsonData)
       .then(response => response.json())
       .then(data => {
-        const arrayOfUsers = [];
 
-        data.forEach(user => {
-          arrayOfUsers.push({
-            name: user.name,
-            company: user.company.name
-          })
-        })
-
+        // Retrieves the ul element
         const users = document.getElementById('users');
-        
-        arrayOfUsers.forEach(user => {
-          const listElement = document.createElement('li')
-          listElement.innerHTML = `<strong>${user.name}</strong>, works at: <strong>${user.company}</strong>`
-          users.append(listElement)
-        })
+        users.innerHTML = data.map((user) => {return `
+          <p><strong>${user.name}</strong> works at <strong>${user.company.name}</strong></p>
+          `
+      }).join('')
+
+        // // Transforming the data we are getting from the API and creating our own object
+        // data.forEach(user => {
+        //   arrayOfUsers.push({
+        //     name: user.name,
+        //     company: user.company.name
+        //   })
+        // })  
+      
+        // // Creates a list element for every user in the array and appends it to the user element
+        // arrayOfUsers.forEach(user => {
+        //   const listElement = document.createElement('li')
+        //   listElement.innerHTML = `<strong>${user.name}</strong>, works at: <strong>${user.company}</strong>`
+        //   users.append(listElement)
+        // })
         
       })
       .catch(err => console.log(err))
