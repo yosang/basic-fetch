@@ -73,12 +73,15 @@ function fetchData() {
 
         // Retrieves the ul element
         const users = document.getElementById('users');
-        
+      
+      // Better method, building one big string and appending it to the li element only once
         // Here we are destructuring the data object
         users.innerHTML = data.map(({name, company: {name: companyName}}) => {return `
           <p><strong>${name}</strong> works at <strong>${companyName}</strong></p>
           `
       }).join('')
+
+      // Bad method, we are looping and re-building the DOM for each li elment we are creating and appending it to the li element
 
         // // Transforming the data we are getting from the API and creating our own object
         // data.forEach(user => {
