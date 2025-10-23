@@ -1,6 +1,6 @@
 # About
 ### JWT
-jsonwebtokens are tokens that are used for secure data exchange between client and a REST api server.
+[jsonwebtokens](https://www.npmjs.com/package/jsonwebtoken) are tokens that are used for secure data exchange between client and a REST api server.
 - Consists  of three parts:
     - Header (metadata, algorithm or type)
     - Payload (claims, or data like user ID's, roles)
