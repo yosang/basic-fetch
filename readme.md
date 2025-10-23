@@ -1,1 +1,1 @@
-basic usage of fetch with comments
+Manipulating and handling API's with the fetch API.
