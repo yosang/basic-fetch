@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORS test</title>
+  </head>
+  <body>
+    <h1>Origin: http://127.0.0.1:5500</h1>
+    <div style="display: flex; gap: 10px">
+      <div>
+        <button onclick="sendSReq()">Send simple request</button>
+        <p>Response:</p>
+        <p id="textArea1"></p>
+      </div>
+      <div>
+        <button onclick="sendNSReq()">Send non-simple request</button>
+        <p>Response:</p>
+        <p id="textArea2"></p>
+      </div>
+      <div>
+        <button onclick="opaqueRes()">Send no-cors request</button>
+        <p>Response:</p>
+        <p id="textArea3"></p>
+      </div>
+    </div>
+    <script>
+      const apiURL = "http://127.0.0.1:3000";
+
+      function sendSReq() {
+        const textElement = document.getElementById("textArea1");
+
+        fetch(apiURL)
+          .then((resp) => {
+            if (!resp.ok) throw new Error("Invalid response");
+            return resp.json();
+          })
+          .then((data) => {
+            console.log(data);
+            textElement.innerHTML = `<p style="color:green;">${data.message}</p>`;
+          })
+          .catch((err) => textElement.innerHTML = `<p style="color:red">${err.message}</p>`);
+      };
+
+      //   This non-simple request is of POST type and holds a custom header
+      function sendNSReq() {
+        const textElement = document.getElementById("textArea2");
+        
+        fetch(apiURL, {
+            method: "POST",
+            body: JSON.stringify({ name: "Kobe Bryant", nickname: "Mamba" }),
+            headers: {
+                "x-api-key": "asasdasd",
+                "Content-Type":"application/json"
+            },
+        })
+        .then((resp) => {
+            if (!resp.ok) throw new Error("Invalid response");
+            return resp.json();
+        })
+        .then((data) => {
+            console.log(data);
+            textElement.innerHTML = `<p style="color:green;">${data.message}</p>`;
+        })
+        .catch((err) => textElement.innerHTML = `<p style="color:red;">${err.message}</p>`);
+    }
+    
+    function opaqueRes() {
+        const textElement = document.getElementById("textArea3");
+        fetch('https://picsum.photos/200', { mode: 'no-cors'})
+        .then(res => {
+            console.log(res)
+            textElement.innerHTML = `<p style="color:green;">${res.type}</p>`;
+        })
+        .catch((err) => textElement.innerHTML = `<p style="color:red;">${err.message}</p>`);
+      }
+    </script>
+  </body>
+</html>
