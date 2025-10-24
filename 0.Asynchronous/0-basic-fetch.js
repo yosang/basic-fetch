@@ -1,4 +1,4 @@
-import apiURL from "./url.js"
+import apiURL from "../url.js"
 
 fetch(apiURL) // returns a promise - a promise is basically just a wrapper around the response object we get back
 .then((res) => { // Once the promise has been unwrapped, the first then will hold the response object, here we are just logging it

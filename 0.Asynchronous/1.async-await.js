@@ -1,4 +1,4 @@
-import apiURL from "./url.js"
+import apiURL from "../url.js"
 
 const url = apiURL
 

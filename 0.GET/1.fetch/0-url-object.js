@@ -1,4 +1,4 @@
-import apiURL from '../url.js'
+import apiURL from '../../url'
 
 const url = new URL(apiURL); // This is now an URL object
 
